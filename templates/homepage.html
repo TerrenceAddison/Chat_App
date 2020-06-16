@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+    <title>
+      Homepage
+      </title>
+      <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Oswald:wght@600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/homepage.css') }}">
+        <script src="/static/javascript/homepage.js"></script>
+        <script src="/static/javascript/chat.js"></script>
+
+     
+    </head>
+    <body>
+        <header class = "contain" id = "topbar">
+            <h1>Project2</h1>
+            <p>a  Chat app</p>
+        </header>
+        <br><br><br><br><br>
+        <div class = "bigtext">
+            Join and connect with people all over the world.<br>
+            <p>Stay anonymous and enjoy!</p><br>
+
+            <a id = "popupbtn" onclick = "popupon();return false;" class="button colorbase bouncy" href = "#">Join now<span class="gradient"></a></span>
+            </form>
+        </div>
+        <div id="popupbox" class="popup">
+
+            <div class="popupcontent">
+              <p>Enter your username:</p>
+
+              <form textonclick = "get_username()"" action="{{url_for('loginproc')}}" method = "POST">
+                <input id = "enterusername" type = "input" name = "username">
+                <input class = "underline" type = "submit" value = "Enter!">
+                </form>
+            </div>
+          
+          </div>
+        <footer id = "bottombar">
+            <div class = "links">
+                For more Information:
+                <a href="https://github.com/TerrenceAddison" target="_blank"><img id="github" src="static/img/githubicon.png"></a>
+                <a href="mailto:terrenceaddison32@gmail.com" target="_blank"><img id="email" src="/static/img/emailicon.png"></a>
+                
+            </div>
+            <span class = "trademark">Designed by :Terrence A.T</span>
+        </footer>
+    </body>
+
+
+
+
+</html>

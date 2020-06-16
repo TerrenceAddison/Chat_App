@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+    <head>
+    <title>
+      Chat Page
+      </title>
+      <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Oswald:wght@600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/homepage.css') }}">
+        <script src="/static/javascript/chat.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+
+     
+    </head>
+
+    <body>
+        <header class = "contain" id = "topbarchat">
+            <h1>Project2</h1>
+        </header>
+        <div class = "sidenav1">
+            <div class="headusername">{{username}}</div>
+            <a href="{{url_for('logout')}}" class="logout-btn">Logout</a>
+        </div>
+        <div class="channelheader">
+            <span class="headchannelname">{{current_channel}}</span>
+            <span class = "typingornot"></span>
+            </div>
+        <div class = "sidenav2">
+                <input type="text" id="addChannel" placeholder="Add New Channel">
+                <br>
+                <br>
+            <p class = "username">Your Channels:</p>
+            <ul class="userchannelList">
+                {%if userChannels%}
+                {%for channel in userChannels%}
+                {%if channel == current_channel%}
+                    <li class = "userchannelList">
+                    <a class="userchannelname current" href="{{url_for('channel',current_channel=channel)}}">
+                        {{channel}}
+ 
+                    </a>
+                    </li>
+                    <br>
+
+                {%else%}
+
+                <li class = "userchannelList">
+                    <a class="userchannelname" href="{{url_for('channel',current_channel=channel)}}">
+                        {{channel}}
+                    </a>
+                </li>
+                    <br>
+                {%endif%}
+                {%endfor%}
+                {%endif%}
+            </ul>
+            <p class = "username">All Channels:</p>
+                <ul class="channelList">
+                    {%if allchannels %}
+                    {%for channel in allchannels%}
+                    <li class = "channelListitem">
+                    <a class="channelname" href="#">
+                    <span>{{channel}}</span>&nbsp;&nbsp;+
+                    </a>
+                    </li>
+                    <br>
+
+                    {%endfor%}
+                    {%endif%}
+
+                </ul>
+        </div>
+        <div class="chatbox">
+            {% if messages%}
+            {% for message in messages%}
+            {%if username != message['username']%}
+
+            <div class="">
+                <div class="">
+                    <div>
+                        <p class="message"><b>{{message['username']}}</b>
+                        <small class="">
+                            {{message['time']['hours']}}:{{message['time']['minutes']}}
+                        </small></p>
+                    </div>
+                    <div>
+                        <p>{{message['message']}}</p>
+                    </div>
+                </div>
+            </div>
+            {%else%}
+
+            <div class="">
+
+                    <div class="text-right message">
+                        <p class="text-right message">
+                        <small class="text-right">
+                            {{message['time']['hours']}}:{{message['time']['minutes']}}
+                        </small>
+                        <b>{{message['username']}}</b></p>
+                    </div>
+                    <div>
+                        <p class="text-right message">{{message['message']}}</p>
+                    </div>
+            </div>
+            {%endif%}
+            {%endfor%}
+            {%endif%}
+        </div>
+        <textarea class="sendmsgbox" name="message" id="messagebox" rows="10" maxlength="200"></textarea>
+        
+    </body>
